@@ -87,7 +87,7 @@ First, clone the repo and install dependencies:
 git clone <your-repo-url>
 cd WebInterview
 npm install
-
+```
 
 ### Option 2: Change Sets
 
@@ -104,6 +104,9 @@ npm install
 ### Option 3: Unlocked Package
 
 Create a package:
+```bash
+sfdx force:package:create -n "ProjectInvoiceSystem" -t Unlocked -r force-app
+```
 
 Create package version:
 ```bash
@@ -174,7 +177,7 @@ private static final String ERP_ENDPOINT = 'https://your-erp-system.com/api/invo
 
 **Optimistic Updates** - UI updates immediately before server confirmation. Feels faster but could cause UI/server mismatches.
 
-
+## Testing
 
 ### Manual Testing
 1. Create a project and verify fields
