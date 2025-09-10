@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Project Dashboard">
+        <template if:true={projects}>
+            <lightning-accordion allow-multiple-sections-open>
+                <template for:each={projects} for:item="proj">
+                    <lightning-accordion-section key={proj.Id} name={proj.Id} label={proj.Name}>
+                        <div class="slds-box slds-m-around_small">
+                            <p><b>Status:</b> {proj.Status__c}</p>
+                            <p><b>Budget:</b> {proj.Budget__c}</p>
+                            <p><b>Start Date:</b> {proj.Start_Date__c}</p>
+                            <p><b>End Date:</b> {proj.End_Date__c}</p>
+                        </div>
+
+                        <!-- Show invoices if available -->
+                        <template if:true={proj.Invoices__r}>
+                            <lightning-datatable
+                                key-field="Id"
+                                data={proj.Invoices__r}
+                                draft-values={draftValues}
+                                onsave={handleSave}
+                                hide-checkbox-column
+                                columns={columns}>
+                            </lightning-datatable>
+                        </template>
+
+                        <!-- No invoices message -->
+                        <template if:false={proj.Invoices__r}>
+                            <p class="slds-p-around_medium slds-text-color_weak">
+                                No invoices available for this project.
+                            </p>
+                        </template>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion>
+        </template>
+
+        <template if:false={projects}>
+            <p class="slds-p-around_medium">No Projects found.</p>
+        </template>
+    </lightning-card>
+</template>
